@@ -47,26 +47,29 @@ class TransaksisController extends Controller
         return redirect()->route('admin.transaksis.index');
     }
 
-    public function edit(Transaksi $transaksis)
+    public function edit(Transaksi $transaksi)
     {
         abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.transaksis.edit', compact('transaksis'));
+        $pengepul = Pengepul::all();
+        $penyetor = Penyetor::all();
+
+        return view('admin.transaksi.edit', compact('transaksi', 'pengepul', 'penyetor'));
     }
 
-    public function update(Request $request, Transaksi $transaksis)
+    public function update(Request $request, Transaksi $transaksi)
     {
-        $transaksis->update($request->all());
+        $transaksi->update($request->all());
 
-        return redirect()->route('admin.transaksi.index');
+        return redirect()->route('admin.transaksis.index');
     }
 
-    public function show(Transaksi $transaksis)
+    public function show(Transaksi $transaksi)
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
 
-        return view('admin.transaksi.show', compact('transaksis'));
+        return view('admin.transaksi.show', compact('transaksi'));
     }
 
     public function destroy(Transaksi $transaksis)

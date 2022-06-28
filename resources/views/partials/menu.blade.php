@@ -76,7 +76,7 @@
             <li class="nav-item">
               <a href="{{ route("admin.transaksis.index") }}" class="nav-link {{ request()->is("admin/transaksis") || request()->is("admin/transaksis/*") ? "active" : "" }}">
                 <div class="icon icon-shape icon-sm shadow border-radius-md bg-primary text-center me-2 d-flex align-items-center justify-content-center">
-                  <i class="fa-fw fas fa-user c-sidebar-nav-icon"></i>
+                  <i class="fa-fw fas fa-shopping-basket c-sidebar-nav-icon"></i>
                 </div>
                 <span class="nav-link-text ms-1">Transaksi</span>
               </a>
@@ -86,7 +86,7 @@
             <li class="nav-item">
               <a href="{{ route("admin.penyetors.index") }}" class="nav-link {{ request()->is("admin/penyetors") || request()->is("admin/penyetors/*") ? "active" : "" }}">
                 <div class="icon icon-shape icon-sm shadow border-radius-md bg-primary text-center me-2 d-flex align-items-center justify-content-center">
-                  <i class="fa-fw fas fa-user c-sidebar-nav-icon"></i>
+                  <i class="fa-fw fas fa-user-tag c-sidebar-nav-icon"></i>
                 </div>
                 <span class="nav-link-text ms-1">Penyetor</span>
               </a>
@@ -96,7 +96,7 @@
             <li class="nav-item">
               <a href="{{ route("admin.pengepuls.index") }}" class="nav-link {{ request()->is("admin/pengepuls") || request()->is("admin/pengepuls/*") ? "active" : "" }}">
                 <div class="icon icon-shape icon-sm shadow border-radius-md bg-primary text-center me-2 d-flex align-items-center justify-content-center">
-                  <i class="fa-fw fas fa-user c-sidebar-nav-icon"></i>
+                  <i class="fa-fw fas fa-people-carry c-sidebar-nav-icon"></i>
                 </div>
                 <span class="nav-link-text ms-1">Pengepul</span>
               </a>
@@ -112,7 +112,7 @@
             <li class="nav-item">
               <a href="{{ route("penyetor.transaksis.index") }}" class="nav-link {{ request()->is("penyetor/transaksis") || request()->is("penyetor/transaksis/*") ? "active" : "" }}">
                 <div class="icon icon-shape icon-sm shadow border-radius-md bg-primary text-center me-2 d-flex align-items-center justify-content-center">
-                  <i class="fa-fw fas fa-user c-sidebar-nav-icon"></i>
+                  <i class="fa-fw fas fa-shopping-basket c-sidebar-nav-icon"></i>
                 </div>
                 <span class="nav-link-text ms-1">Transaksi</span>
               </a>
@@ -132,7 +132,7 @@
             <li class="nav-item">
               <a href="{{ route("pengepul.transaksis.index") }}" class="nav-link {{ request()->is("pengepul/transaksis") || request()->is("pengepul/transaksis/*") ? "active" : "" }}">
                 <div class="icon icon-shape icon-sm shadow border-radius-md bg-primary text-center me-2 d-flex align-items-center justify-content-center">
-                  <i class="fa-fw fas fa-user c-sidebar-nav-icon"></i>
+                  <i class="fa-fw fas fa-shopping-basket c-sidebar-nav-icon"></i>
                 </div>
                 <span class="nav-link-text ms-1">Transaksi</span>
               </a>

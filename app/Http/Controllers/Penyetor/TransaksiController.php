@@ -53,6 +53,7 @@ class TransaksiController extends Controller
             'jumlahsampah' => $request->jumlahsampah,
             'bayar' => $request->bayar,
             'tanggal' => $request->tanggal,
+            'status' => 0,
         ]);
 
         return redirect()->route('penyetor.transaksis.index');

@@ -7,15 +7,63 @@
     </div>
 
     <div class="card-body">
-        <form method="POST" action="{{ route("admin.transaksis.update", [$transaksi->id]) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route("admin.transaksis.update" , [$transaksi->id]) }}" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label class="required" for="title">{{ trans('cruds.permission.fields.title') }}</label>
-                <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $->title) }}" required>
-                @if($errors->has('title'))
+                <label class="required" for="pengepul_id">Pengepul</label>
+                <select class="form-control select2 {{ $errors->has('pengepul_id') ? 'is-invalid' : '' }}" name="pengepul_id" id="pengepul_id" required>
+                    @foreach($pengepul as $id => $pengepul)
+                        <option value="{{ $id }}"{{ old('pengepul_id', '' ) ? 'selected' : '' }} >{{ $pengepul->name }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('pengepul '))
                     <div class="invalid-feedback">
-                        {{ $errors->first('title') }}
+                        {{ $errors->first('pengepul ') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="penyetor_id">Penyetor</label>
+                <select class="form-control select2 {{ $errors->has('penyetor_id') ? 'is-invalid' : '' }}" name="penyetor_id" id="penyetor_id"  required>
+                    @foreach($penyetor as $id => $penyetor)
+                        <option value="{{ $id }}" {{ old('penyetor_id', '' ) ? 'selected' : '' }}>{{ $penyetor->name }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('penyetor '))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('penyetor ') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="jumlahsampah">Jumlah Sampah (Kg)</label>
+                <input class="form-control {{ $errors->has('jumlahsampah') ? 'is-invalid' : '' }}" type="number" name="jumlahsampah" id="jumlahsampah" value="{{ old('jumlahsampah', $transaksi->jumlahsampah) }}" required>
+                @if($errors->has('jumlahsampah'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('jumlahsampah') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.permission.fields.title_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="bayar">Bayar (IDR)</label>
+                <input class="form-control {{ $errors->has('no_hp') ? 'is-invalid' : '' }}" type="number" name="bayar" id="bayar" value=" {{ old('bayar', $transaksi->bayar) }}" readonly required>
+                @if($errors->has('jumlahsampah'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('jumlahsampah') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.permission.fields.title_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="tanggal">Tanggal</label>
+                <input class="form-control {{ $errors->has('tanggal') ? 'is-invalid' : '' }}" type="date" name="tanggal" id="tanggal" value="{{ old('tanggal', now()) }}" required>
+                @if($errors->has('tanggal'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('tanggal') }}
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.permission.fields.title_helper') }}</span>
@@ -29,6 +77,28 @@
     </div>
 </div>
 
+
+
+@endsection
+
+@section('scripts')
+<script>
+    const jum = document.getElementById('jumlahsampah');
+    jum.addEventListener('change', (event) => {
+        const jum = document.getElementById('jumlahsampah');
+        document.getElementById('bayar').value = jum.value * 2000;
+    });
+
+    const date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let currentDate = '${day}/${month}/${year}';
+
+    document.getElementById('tanggal').value = currentDate;
+
+</script>
 
 
 @endsection

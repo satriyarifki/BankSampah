@@ -9,7 +9,7 @@
     <div class="card-body">
         <div class="form-group">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.permissions.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.transaksis.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -17,24 +17,48 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.permission.fields.id') }}
+                            Penyetor 
                         </th>
                         <td>
-                            {{ $permission->id }}
+                            {{ $transaksi->penyetor->name }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.permission.fields.title') }}
+                            Pengepul 
                         </th>
                         <td>
-                            {{ $permission->title }}
+                            {{ $transaksi->pengepul_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Jumlah Sampah
+                        </th>
+                        <td>
+                            {{ $transaksi->jumlahsampah }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Bayar
+                        </th>
+                        <td>
+                            {{ $transaksi->bayar }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Tanggal
+                        </th>
+                        <td>
+                            {{ $transaksi->tanggal }}
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.permissions.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.transaksis.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>

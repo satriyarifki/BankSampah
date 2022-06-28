@@ -6,7 +6,7 @@
             <div class="card-body p-4">
                 <h1>Bank Sampah</h1>
 
-                <p class="text-muted">{{ trans('global.login') }}</p>
+                <h4 class="text-muted">{{ trans('global.login') }}</h4>
 
                 @if(session('message'))
                     <div class="alert alert-info" role="alert">
@@ -53,18 +53,23 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-6 ps-4">
                             <button type="submit" class="btn btn-primary px-4">
                                 {{ trans('global.login') }}
                             </button>
                         </div>
-                        <div class="col-6 text-right">
+                        <div class="col-3 text-end">
                             @if(Route::has('password.request'))
                                 <a class="btn btn-link px-0" href="{{ route('password.request') }}">
                                     {{ trans('global.forgot_password') }}
                                 </a><br>
                             @endif
-
+                        </div>
+                        <div class="col-3 text-end pe-5">
+                            <a class="btn btn-link px-0" href="{{ route('register') }}">
+                                {{ trans('global.register') }}
+                            </a>
+                            <br>
                         </div>
                     </div>
                 </form>
