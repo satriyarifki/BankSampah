@@ -1,14 +1,5 @@
-@extends('layouts.admin')
+@extends('layouts.user')
 @section('content')
-@can('permission_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.transaksis.create') }}">
-                Tambah Transaksi
-            </a>
-        </div>
-    </div>
-@endcan
 <div class="card">
     <div class="card-header">
         Transaksi Diterima
@@ -38,6 +29,9 @@
                             Tanggal Bayar
                         </th>
                         <th>
+                            Status
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -49,7 +43,7 @@
 
                             </td>
                             <td>
-                                {{ $transaksi->penyetor->name ?? '' }}
+                                <a href="{{ route('pengepul.transaksis.show', $transaksi->penyetor) }}" class="link-info">{{ $transaksi->penyetor->name ?? '' }}</a>
                             </td>
                             <td>
                                 {{ $transaksi->pengepul->name ?? '' }}
@@ -64,26 +58,18 @@
                                 {{ $transaksi->tanggal ?? '' }}
                             </td>
                             <td>
-                                @can('permission_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.transaksis.show', $transaksi->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
-
-                                @can('permission_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.transaksis.edit', $transaksi->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
-
-                                @can('permission_delete')
-                                    <form action="{{ route('admin.transaksis.destroy', $transaksi->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
-
+                                @if ($transaksi->status == 0)
+                                    <span class="badge text-primary">Menunggu diterima</span>
+                                @elseif ($transaksi->status == 1)
+                                    <span class="badge text-warning">Diproses</span>
+                                @elseif ($transaksi->status == 2)
+                                    <span class="badge text-success">Selesai</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($transaksi->status < 2)
+                                    <a href="{{ route('pengepul.transaksis.edit', $transaksi) }}" class="btn btn-info" tabindex="-1" role="button" >Ubah</a>
+                                @endif    
                             </td>
 
                         </tr>

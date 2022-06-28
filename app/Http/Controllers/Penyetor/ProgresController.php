@@ -1,17 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Pengepul;
+namespace App\Http\Controllers\Penyetor;
 
 use App\Http\Controllers\Controller;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Transaksi;
 use App\Models\Penyetor;
-use App\Models\Pengepul;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
-class TransaksiController extends Controller
+class ProgresController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,12 +17,9 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('pengepul'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $pengepul = Pengepul::all()->pluck('name', 'id');
-        $pid = Pengepul::where('users_id', Auth::id())->first();
-        $transaksis = Transaksi::where('pengepul_id', $pid->id)->get();
-
-        return view('user.pengepul.index', compact('pengepul', 'transaksis'));
+        $auth_id =  Penyetor::where('users_id',Auth::id())->first();
+        $transaksis = Transaksi::where('penyetor_id', $auth_id->id)->get();
+        return view('user.penyetor.progres', compact('transaksis'));
     }
 
     /**
@@ -35,7 +29,7 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -46,7 +40,7 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //
     }
 
     /**
@@ -55,10 +49,9 @@ class TransaksiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($penyetor)
+    public function show($id)
     {
-        $penyetor = Penyetor::where('id', $penyetor)->first();
-        return view('user.pengepul.show', compact('penyetor'));
+        //
     }
 
     /**
@@ -67,19 +60,9 @@ class TransaksiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaksi $transaksi)
+    public function edit($id)
     {
-        abort_if(Gate::denies('pengepul'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $tambah = 1;
-        
-        if ($transaksi->status <= 2) {
-            $transaksi->update([
-            'status' => $transaksi->status + 1,
-        ]);
-        }
-        
-        return redirect()->route('pengepul.transaksis.index');
+        //
     }
 
     /**
@@ -89,9 +72,9 @@ class TransaksiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaksi $transaksi)
+    public function update(Request $request, $id)
     {
-        
+        //
     }
 
     /**

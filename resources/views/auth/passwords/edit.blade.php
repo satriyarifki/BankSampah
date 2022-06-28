@@ -29,6 +29,46 @@
                                 </div>
                             @endif
                         </div>
+                        @can('pengepul')
+                        <div class="form-group">
+                            <label class="required" for="no_hp">Nomor HP</label>
+                            <input class="form-control {{ $errors->has('no_hp') ? 'is-invalid' : '' }}" type="number" name="no_hp" id="no_hp" value="{{ old('no_hp', $pengepul->no_hp) }}" required>
+                            @if($errors->has('no_hp'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('no_hp') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="alamat">Alamat</label>
+                            <input class="form-control {{ $errors->has('alamat') ? 'is-invalid' : '' }}" type="text" name="alamat" id="alamat" value="{{ old('alamat', $pengepul->alamat) }}" required>
+                            @if($errors->has('alamat'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('alamat') }}
+                                </div>
+                            @endif
+                        </div>
+                        @endcan
+                        @can('penyetor')
+                        <div class="form-group">
+                            <label class="required" for="no_hp">Nomor HP</label>
+                            <input class="form-control {{ $errors->has('no_hp') ? 'is-invalid' : '' }}" type="number" name="no_hp" id="no_hp" value="{{ old('no_hp', $penyetor->no_hp) }}" required>
+                            @if($errors->has('no_hp'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('no_hp') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="alamat">Alamat</label>
+                            <input class="form-control {{ $errors->has('alamat') ? 'is-invalid' : '' }}" type="text" name="alamat" id="alamat" value="{{ old('alamat', $penyetor->alamat) }}" required>
+                            @if($errors->has('alamat'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('alamat') }}
+                                </div>
+                            @endif
+                        </div>
+                        @endcan
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit">
                                 {{ trans('global.save') }}

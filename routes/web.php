@@ -8,9 +8,9 @@ Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));
     }
-
-    return redirect()->route('admin.home');
-});
+    return view('home');
+    
+})->name('home');
 
 Auth::routes();
 
@@ -47,6 +47,9 @@ Route::group(['prefix' => 'penyetor', 'as' => 'penyetor.', 'namespace' => 'Penye
     // Transaksis
     Route::resource('transaksis', 'TransaksiController');
 
+    // Progress
+    Route::resource('progress', 'ProgresController');
+
 });
 
 Route::group(['prefix' => 'pengepul', 'as' => 'pengepul.', 'namespace' => 'Pengepul', 'middleware' => ['auth']], function () {
@@ -54,6 +57,11 @@ Route::group(['prefix' => 'pengepul', 'as' => 'pengepul.', 'namespace' => 'Penge
 
     // Transaksis
     Route::resource('transaksis', 'TransaksiController');
+
+    
+
+    Route::put('updatestatus', 'status@update')->name('updatestatus');
+    Route::get('updates', 'status@update')->name('updates');
 
 });
 

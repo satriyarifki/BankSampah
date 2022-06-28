@@ -1,7 +1,7 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html" target="_blank">
+      <a class="navbar-brand m-0" href="#" target="_blank">
         <span class="ms-1 font-weight-bold"><h4>Bank Sampah </h4></span>
       </a>
     </div>
@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link {{ request()->is("admin") ? "active" : "" }}" href="{{ route("admin.home") }}">
+          <a class="nav-link {{ request()->is("admin") ? "active" : "" }}" href="{{ route("home") }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-primary text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fas fa-fw fa-tachometer-alt"></i>
             </div>
@@ -111,6 +111,26 @@
           @can('penyetor')
             <li class="nav-item">
               <a href="{{ route("penyetor.transaksis.index") }}" class="nav-link {{ request()->is("penyetor/transaksis") || request()->is("penyetor/transaksis/*") ? "active" : "" }}">
+                <div class="icon icon-shape icon-sm shadow border-radius-md bg-primary text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="fa-fw fas fa-user c-sidebar-nav-icon"></i>
+                </div>
+                <span class="nav-link-text ms-1">Transaksi</span>
+              </a>
+            </li>
+          @endcan
+          @can('penyetor')
+            <li class="nav-item">
+              <a href="{{ route("penyetor.progress.index") }}" class="nav-link {{ request()->is("penyetor/progress") || request()->is("penyetor/progress/*") ? "active" : "" }}">
+                <div class="icon icon-shape icon-sm shadow border-radius-md bg-primary text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="fa-fw fas fa-user c-sidebar-nav-icon"></i>
+                </div>
+                <span class="nav-link-text ms-1">Progress</span>
+              </a>
+            </li>
+          @endcan
+          @can('pengepul')
+            <li class="nav-item">
+              <a href="{{ route("pengepul.transaksis.index") }}" class="nav-link {{ request()->is("pengepul/transaksis") || request()->is("pengepul/transaksis/*") ? "active" : "" }}">
                 <div class="icon icon-shape icon-sm shadow border-radius-md bg-primary text-center me-2 d-flex align-items-center justify-content-center">
                   <i class="fa-fw fas fa-user c-sidebar-nav-icon"></i>
                 </div>

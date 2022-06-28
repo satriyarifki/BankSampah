@@ -100,6 +100,7 @@
   <script src="{{ asset('js/main.js') }}"></script>
   <script>
       $(function() {
+let pdfButtonTrans = '{{ trans('global.datatables.pdf') }}'
 
 let languages = {
   'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'

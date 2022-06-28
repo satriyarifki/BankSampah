@@ -14,7 +14,7 @@
                 <label class="required" for="users_id">User ID</label>
                 <select class="form-control select2 {{ $errors->has('users_id') ? 'is-invalid' : '' }}" name="users_id" id="users_id"  required>
                     @foreach($users as $id => $users)
-                        <option value="{{ $id  }}"{{ (old('users_id', ) || $penyetor->users_id)  ? 'selected' : '' }} >{{ $users }}</option>
+                        <option value="{{ $id+1  }}" >{{ $users->id }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('users '))

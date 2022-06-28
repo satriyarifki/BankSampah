@@ -1,17 +1,8 @@
-@extends('layouts.admin')
+@extends('layouts.user')
 @section('content')
-@can('permission_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.pengepuls.create') }}">
-                Tambah Pengepul
-            </a>
-        </div>
-    </div>
-@endcan
 <div class="card">
     <div class="card-header">
-        Pengepul List
+        Transaksi Diterima
     </div>
 
     <div class="card-body">
@@ -23,55 +14,54 @@
 
                         </th>
                         <th>
-                            Nama Pengepul
+                            Penyetor
                         </th>
                         <th>
-                            No HP
+                            Pengepul
                         </th>
                         <th>
-                            Alamat
+                            Jumlah Sampah
                         </th>
                         <th>
-                            &nbsp;
+                            Bayar
+                        </th>
+                        <th>
+                            Tanggal Bayar
+                        </th>
+                        <th>
+                            Status
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($pengepuls as $key => $pengepul)
-                        <tr data-entry-id="{{ $pengepul->id }}">
+                    @foreach($transaksis as $key => $transaksi)
+                        <tr data-entry-id="{{ $transaksi->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $pengepul->name ?? '' }}
+                                {{ $transaksi->penyetor->name ?? '' }}
                             </td>
                             <td>
-                                {{ $pengepul->no_hp ?? '' }}
+                                {{ $transaksi->pengepul->name ?? '' }}
                             </td>
                             <td>
-                                {{ $pengepul->alamat ?? '' }}
+                                {{ $transaksi->jumlahsampah ?? '' }} Kg
                             </td>
                             <td>
-                                @can('permission_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.pengepuls.show', $pengepul->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
-
-                                @can('permission_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.pengepuls.edit', $pengepul->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
-
-                                @can('permission_delete')
-                                    <form action="{{ route('admin.pengepuls.destroy', $pengepul->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
-
+                                Rp.{{ $transaksi->bayar ?? '' }}
+                            </td>
+                            <td>
+                                {{ $transaksi->tanggal ?? '' }}
+                            </td>
+                            <td>
+                                @if ($transaksi->status == 0)
+                                    <span class="badge text-primary">Menunggu diterima</span>
+                                @elseif ($transaksi->status == 1)
+                                    <span class="badge text-warning">Diproses</span>
+                                @elseif ($transaksi->status == 2)
+                                    <span class="badge text-success">Selesai</span>
+                                @endif
                             </td>
 
                         </tr>
@@ -94,7 +84,7 @@
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.pengepuls.massDestroy') }}",
+    url: "{{ route('admin.transaksis.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {

@@ -41,7 +41,7 @@ class PenyetorController extends Controller
     {
         abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = user::all()->pluck('id');
+        $users = user::all();
 
         return view('admin.penyetor.edit', compact('penyetor', 'users'));
     }
