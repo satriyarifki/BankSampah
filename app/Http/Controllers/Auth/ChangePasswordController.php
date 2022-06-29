@@ -17,9 +17,9 @@ class ChangePasswordController extends Controller
     public function edit()
     {
         abort_if(Gate::denies('profile_password_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $cek = Pengepul::where('users_id', '!=' , auth()->user()->id);
-        $cek2 = Penyetor::where('users_id', '!=' , auth()->user()->id);
-        if ($cek && $cek2) {
+        $cek = Pengepul::where('users_id' , auth()->user()->id);
+        $cek2 = Penyetor::where('users_id', auth()->user()->id);
+        if ($cek==null && $cek2==null) {
             if (auth()->user()->roles()->first()->id==3){
                 Pengepul::create([
                     'users_id' => auth()->user()->id,
